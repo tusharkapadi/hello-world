@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+     
+    - name: Download Sysdig Scanner CLI
+      run: curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
+      
+    - name: Scan image using Sysdig Scanner CLI
+      run: SECURE_API_TOKEN=01d1debd-933a-4a55-9053-86f6225e2e4f ./sysdig-cli-scanner --apiurl https://us2.app.sysdig.com  tusharkapadi/hello:2.0
+
+      
+    
+      
+
