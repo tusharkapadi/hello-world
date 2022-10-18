@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     
     - name: print something
-      run: echo %s
+      run: git tag ${VERSION}
 
     
     - name: Build the Docker image
