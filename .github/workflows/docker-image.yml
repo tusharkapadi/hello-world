@@ -17,6 +17,9 @@ jobs:
     
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag tusharkapadi/hello:$(date +%s)
+           echo $(date +%s)
+           echo %s
+      
      
     - name: Download Sysdig Scanner CLI
       run: curl -LO "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(curl -L -s https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
