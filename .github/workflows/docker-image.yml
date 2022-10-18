@@ -15,10 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
+    - name: print something
+      run: echo $(date +%s)
+           echo %s
+
+    
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag tusharkapadi/hello:$(date +%s)
-           echo $(date +%s)
-           echo %s
       
      
     - name: Download Sysdig Scanner CLI
